@@ -13,16 +13,12 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
 app.set('view engine', 'ejs');
 
 
-app.get('/add-book', (req, res) => {
-    const book = new Book({
-      name: 'Book 1',
-      publisher: 'Akil Publications',
-      author: 'Akil Ahmed'
-    })
-  
-    book.save()
+//routes
+
+  app.get('/books', (req, res) => {
+    Book.find().sort({ createdAt: -1 })
       .then(result => {
-        res.send(result);
+        res.render('index', { books: result});
       })
       .catch(err => {
         console.log(err);
