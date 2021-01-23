@@ -1,3 +1,4 @@
+const { name } = require('ejs');
 const express = require('express');
 const mongoose = require('mongoose');
 const Book = require('./models/book');
@@ -14,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 
 
-//routes
 app.get('/books/create', (req, res) => {
     res.render('create', { title: 'Create a new book' });
   });
@@ -50,4 +50,17 @@ app.get('/books/create', (req, res) => {
         console.log(err);
       });
   });
+
+
+  app.patch('/books/:id', async(req, res) => {
+    try{
+      const book = await Book.findById(req.params.id);
+      book.name = "name updated";
+      const a1 = await book.save();
+      res.json({ redirect: '/books' });
+    }catch(err){
+      res.send('error')
+    }
+    
+  })
 
