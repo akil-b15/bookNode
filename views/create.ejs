@@ -1,0 +1,22 @@
+<html lang="en">
+<%- include("./partials/header.ejs") %>
+
+<body>
+  <%- include("./partials/nav.ejs") %>
+
+  <div class="create-book content">
+    <form action="/books" method="POST">
+      <label for="name">Book name:</label>
+      <input type="text" id="name" name="name" required><br>
+      <label for="publisher">Publisher:</label>
+      <input type="text" id="publisher" name="publisher" required><br>
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required><br>
+      <label for="author">Author2:</label>
+      <input type="text" id="author" name="author"><br>
+      <button>Submit</button>
+    </form>
+  </div>
+
+</body>
+</html>

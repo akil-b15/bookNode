@@ -9,11 +9,15 @@ mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology: true})
     .then((result) => app.listen(3000))
     .catch((err) => console.log(err));
 
+app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 
 
 //routes
+app.get('/books/create', (req, res) => {
+    res.render('create', { title: 'Create a new book' });
+  });
 
   app.get('/books', (req, res) => {
     Book.find().sort({ createdAt: -1 })
@@ -21,6 +25,16 @@ app.set('view engine', 'ejs');
         res.render('index', { books: result});
       })
       .catch(err => {
+        console.log(err);
+      });
+  });
+
+  app.post('/books', (req, res) => {
+      const book = new Book(req.body);
+
+      book.save().then((result)=>{
+        res.redirect('/books');
+      }).catch((err) => {
         console.log(err);
       });
   });

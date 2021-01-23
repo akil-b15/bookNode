@@ -9,15 +9,16 @@
 
     <% if (books.length > 0) { %>
       <% books.forEach(book => { %>
+        <div>
         <h3 class="title">Book Name: <%= book.name %></h3>
         <p class="publisher">Publisher: <%= book.publisher %></p>
         <p class="author">Author: <%= book.author %></p>
+        </div>
       <% }) %>
     <% } else { %>
       <p>There are no books to display...</p>
     <% } %>
     
   </div>
-
 </body>
 </html>
