@@ -14,11 +14,27 @@
         <p class="publisher">Publisher: <%= book.publisher %></p>
         <p class="author">Author: <%= book.author %></p>
         </div>
+        <div>
+          <button class="delete" data-dl="<%= book._id %>">delete</button>
+        </div>
       <% }) %>
     <% } else { %>
       <p>There are no books to display...</p>
     <% } %>
     
   </div>
+  <script>
+    const dlId = document.querySelector('button.delete');
+    dlId.addEventListener('click', (e) => {
+      const endpoint = `/books/${dlId.dataset.dl}`;
+      fetch(endpoint, {
+        method: 'DELETE',
+      })
+      .then(response => response.json())
+      .then(data => window.location.href = data.redirect)
+      .catch(err => console.log(err));
+    });
+    
+  </script>
 </body>
 </html>

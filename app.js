@@ -38,3 +38,16 @@ app.get('/books/create', (req, res) => {
         console.log(err);
       });
   });
+
+  app.delete('/books/:id', (req, res) => {
+    const id = req.params.id;
+    
+    Book.findByIdAndDelete(id)
+      .then(result => {
+        res.json({ redirect: '/books' });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  });
+
